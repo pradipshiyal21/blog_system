@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:blog/Resources/Private/Language/locallang.xlf" date="2026-04-16T16:40:53Z" product-name="blog">
+		<header/>
+		<body>
+			<trans-unit id="tx_blog_domain_model_post" resname="tx_blog_domain_model_post">
+				<source>Post</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_post.description" resname="tx_blog_domain_model_post.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_post.title" resname="tx_blog_domain_model_post.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_post.title.description" resname="tx_blog_domain_model_post.title.description">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_post.description.description" resname="tx_blog_domain_model_post.description.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_post.images" resname="tx_blog_domain_model_post.images">
+				<source>Images</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_post.images.description" resname="tx_blog_domain_model_post.images.description">
+				<source>Images</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_post.date" resname="tx_blog_domain_model_post.date">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_post.date.description" resname="tx_blog_domain_model_post.date.description">
+				<source>Date</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

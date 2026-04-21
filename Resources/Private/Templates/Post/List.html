@@ -1,0 +1,38 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+This template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        Post:
+          List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="content">
+    <h1>Listing for Post</h1>
+    <f:flashMessages />
+    <table class="tx_blog table">
+        <tr>
+            <th> <f:translate key="tx_blog_domain_model_post.title" /> </th>
+            <th> <f:translate key="tx_blog_domain_model_post.description" /> </th>
+            <th> <f:translate key="tx_blog_domain_model_post.images" /> </th>
+            <th> <f:translate key="tx_blog_domain_model_post.date" /> </th>
+            <th> Actions </th>
+        </tr>
+        <f:for each="{posts}" as="post">
+            <tr>
+                <td> <f:image image="{post.images}" treatIdAsReference="1" width="100" /> </td>
+                <td> {post.title} </td>
+                <td> {post.description -> f:format.stripTags() -> f:format.crop(maxCharacters: 50)} </td>
+                <td> {post.date -> f:format.date()} </td>
+                <td> <f:link.action action="show" arguments="{post : post}">View</f:link.action> </td>
+            </tr>
+        </f:for>
+    </table>
+</f:section>
+</html>

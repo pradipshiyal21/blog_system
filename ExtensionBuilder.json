@@ -1,0 +1,156 @@
+{
+    "modules": [
+        {
+            "config": {
+                "position": [
+                    44.73828125,
+                    53.33984375
+                ]
+            },
+            "value": {
+                "name": "Post",
+                "objectsettings": {
+                    "uid": 1184651110222,
+                    "type": "Entity",
+                    "aggregateRoot": true,
+                    "sorting": true,
+                    "addDeletedField": true,
+                    "addHiddenField": true,
+                    "addStarttimeEndtimeFields": true,
+                    "categorizable": false,
+                    "description": "",
+                    "mapToTable": "",
+                    "parentClass": ""
+                },
+                "actionGroup": {
+                    "_default0_index": true,
+                    "_default1_list": true,
+                    "_default2_show": true,
+                    "_default3_new_create": true,
+                    "_default4_edit_update": true,
+                    "_default5_delete": true,
+                    "customActions": []
+                },
+                "propertyGroup": {
+                    "properties": [
+                        {
+                            "uid": "749571183063",
+                            "propertyName": "title",
+                            "propertyType": "String",
+                            "propertyDescription": "",
+                            "allowedFileTypes": "",
+                            "maxItems": 1,
+                            "propertyIsRequired": true,
+                            "propertyIsNullable": false,
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false
+                        },
+                        {
+                            "uid": "46227177338",
+                            "propertyName": "description",
+                            "propertyType": "RichText",
+                            "propertyDescription": "",
+                            "allowedFileTypes": "",
+                            "maxItems": 1,
+                            "propertyIsRequired": false,
+                            "propertyIsNullable": false,
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false
+                        },
+                        {
+                            "uid": "677515656378",
+                            "propertyName": "images",
+                            "propertyType": "File",
+                            "propertyDescription": "",
+                            "allowedFileTypes": "",
+                            "maxItems": 1,
+                            "propertyIsRequired": false,
+                            "propertyIsNullable": false,
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false
+                        },
+                        {
+                            "uid": "514324308679",
+                            "propertyName": "date",
+                            "propertyType": "Date",
+                            "propertyDescription": "",
+                            "allowedFileTypes": "",
+                            "maxItems": 1,
+                            "propertyIsRequired": false,
+                            "propertyIsNullable": false,
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false
+                        }
+                    ]
+                },
+                "relationGroup": {
+                    "relations": []
+                }
+            }
+        }
+    ],
+    "wires": [],
+    "properties": {
+        "name": "Blog",
+        "vendorName": "MyVendor",
+        "extensionKey": "blog",
+        "originalExtensionKey": "blog",
+        "originalVendorName": "MyVendor",
+        "description": "",
+        "emConf": {
+            "category": "plugin",
+            "custom_category": "",
+            "version": "",
+            "state": "",
+            "disableVersioning": false,
+            "disableLocalization": false,
+            "generateDocumentationTemplate": false,
+            "generateEmptyGitRepository": false,
+            "generateEditorConfig": false,
+            "generateSiteSet": false,
+            "sourceLanguage": "",
+            "targetVersion": "",
+            "dependsOn": ""
+        },
+        "category": "plugin",
+        "custom_category": "",
+        "version": "",
+        "state": "",
+        "disableVersioning": false,
+        "disableLocalization": false,
+        "generateDocumentationTemplate": false,
+        "generateEmptyGitRepository": false,
+        "generateEditorConfig": false,
+        "generateSiteSet": false,
+        "sourceLanguage": "",
+        "targetVersion": "",
+        "dependsOn": "",
+        "persons": [],
+        "plugins": [
+            {
+                "name": "Blog List",
+                "key": "bloglist",
+                "description": "",
+                "actions": {
+                    "controllerActionCombinations": {
+                        "Post": [
+                            "list",
+                            "show",
+                            "index",
+                            "delete",
+                            "edit"
+                        ]
+                    },
+                    "noncacheableActions": []
+                }
+            }
+        ],
+        "backendModules": []
+    },
+    "storagePath": "\/var\/www\/html\/packages\/",
+    "log": {
+        "last_modified": "2026-04-16 08:00",
+        "extension_builder_version": "v13.1.0",
+        "be_user": " (1)"
+    }
+}

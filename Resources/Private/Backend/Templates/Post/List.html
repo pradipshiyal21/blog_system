@@ -1,0 +1,55 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+This template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Backend:
+        Templates:
+          Post:
+            List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="Buttons">
+    <be:moduleLayout.button.linkButton
+        icon="actions-add"
+        title="{f:translate(id: 'LLL:EXT:backend/Resources/Private/Language/locallang_layout.xlf:newRecordGeneral')}"
+        link="{f:uri.action(controller: 'Post', action: 'new')}"
+    />
+</f:section>
+
+<f:section name="Content">
+    <h1>Listing for Post</h1>
+
+    <f:flashMessages />
+
+    <table class="tx_blog">
+        <tr>
+            <th><f:translate key="tx_blog_domain_model_post.title" /></th>
+            <th><f:translate key="tx_blog_domain_model_post.description" /></th>
+            <th><f:translate key="tx_blog_domain_model_post.images" /></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <f:for each="{posts}" as="post">
+            <tr>
+                <td><f:link.action action="show" arguments="{post: post}">{post.title}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{post: post}">{post.description}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{post: post}">{post.images.originalResource.name}</f:link.action></td>
+                <td><f:link.action action="edit" arguments="{post: post}" class="btn btn-default">Edit</f:link.action></td>
+                <td><f:link.action action="delete" arguments="{post: post}" class="btn btn-danger">Delete</f:link.action></td>
+            </tr>
+        </f:for>
+    </table>
+
+    <f:link.action action="new" class="btn btn-default">New Post</f:link.action>
+</f:section>
+</html>

@@ -1,0 +1,18 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+    <f:section name="content">
+        <div class="container mt-4 d-flex justify-content-center">
+            <div class="card text-center" style="width: 44rem;">
+                <f:if condition="{post.images}">
+                    <f:image image="{post.images}" treatIdAsReference="1" class="card-img-top img-fluid"/>
+                </f:if>
+                <div class="card-body">
+                    <h5 class="card-title">{post.title}</h5>
+                    <p> {post.date -> f:format.date()} </p>
+                    <p class="card-text"> <f:format.html>{post.description}</f:format.html> </p>
+                    <f:link.action action="list" class="btn btn-primary">Back to list</f:link.action>
+                </div>
+            </div>
+        </div>
+    </f:section>
+</html>
