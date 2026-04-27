@@ -1,0 +1,18 @@
+<f:if condition="{posts}">
+<f:for each="{posts}" as="post">
+    <tr>
+        <td> <f:image image="{post.images}" treatIdAsReference="1" width="100" /> </td>
+        <td> {post.title} </td>
+        <td> {post.description -> f:format.stripTags() -> f:format.crop(maxCharacters: 50)} </td>
+        <td> <f:format.date date="{post.date}" format="d F Y" /> </td>
+        <td> <f:link.action action="show" arguments="{post : post}">View</f:link.action> </td>
+    </tr>
+</f:for>
+</f:if>
+<f:if condition="{posts -> f:count()} == 0">
+    <tr>
+        <td colspan="5" class="text-center">
+            No records found
+        </td>
+    </tr>
+</f:if>

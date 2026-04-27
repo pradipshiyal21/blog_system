@@ -36,6 +36,9 @@
 			<trans-unit id="tx_blog_bloglist.description" resname="tx_blog_bloglist.description">
 				<source></source>
 			</trans-unit>
+			<trans-unit id="tx_blog_domain_model_comment" resname="tx_blog_domain_model_comment">
+    			<source>Blog Comments</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

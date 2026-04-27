@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace MyVendor\Blog\Controller;
 
+use MyVendor\Blog\Domain\Model\Post;
+use MyVendor\Blog\Domain\Model\Comment;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use MyVendor\Blog\Domain\Repository\PostRepository;
+use MyVendor\Blog\Domain\Repository\CommentRepository;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
+use TYPO3\CMS\Core\Pagination\SimplePagination;
 
 /**
  * This file is part of the "Blog" Extension for TYPO3 CMS.
@@ -20,32 +25,59 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * PostController
  */
-class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class PostController extends ActionController
 {
     /**
      * action list
      */
-    public function listAction(): ResponseInterface
+    public function listAction(int $currentPage = 1): ResponseInterface
     {
         $query = $this->postRepository->createQuery();
 
         $order = strtolower($this->settings['sortOrder']) === 'desc' ? 'DESC' : 'ASC';
-        $query->setOrderings([
-            'date' => $order
-        ]);
+        $query->setOrderings(['date' => $order]);
 
-        if (!empty($this->settings['limit'])) {
-            $query->setLimit((int)$this->settings['limit']);
+        $filter = $this->request->hasArgument('filter') ? $this->request->getArgument('filter') : [];
+        
+        $keyword = $filter['keyword'] ?? '';
+        $date = $filter['date'] ?? '';
+        $constraints = [];
+
+        if (!empty($keyword)) {
+            $constraints[] = $query->like('title', '%' .$keyword. '%');
         }
 
-        $querySettings = $query->getQuerySettings();
-        $querySettings->setRespectStoragePage(true);
-        $querySettings->setStoragePageIds([
-            (int)$this->settings['storagePid']
-        ]);
+        if (!empty($date)) {
+            $constraints[] = $query->equals('date',new \DateTime($date));
+        }
+
+        if (!empty($constraints)) {
+            $query->matching($query->logicalAnd(...$constraints));
+        }
 
         $posts = $query->execute();
-        $this->view->assign('posts', $posts);
+
+        $itemsPerPage = (int)$this->settings['limit'] > 0 ? (int)$this->settings['limit'] : $posts->count();
+        $paginator = new QueryResultPaginator($posts, $currentPage, $itemsPerPage);
+        $pagination = new SimplePagination($paginator);
+        
+        $this->view->assignMultiple([
+            'posts' => $paginator->getPaginatedItems(),
+            'pagination' => $pagination,
+            'paginator' => $paginator,
+            'filter' => $filter
+        ]);
+        
+        if ((int)($this->request->getQueryParams()['type'] ?? 0) === 999) {
+            return $this->htmlResponse(
+                $this->view->renderPartial('Post/AjaxList', null, [
+                    'posts' => $paginator->getPaginatedItems(),
+                    'pagination' => $pagination,
+                    'paginator' => $paginator,
+                    'filter' => $filter
+                ])
+            );
+        }
         return $this->htmlResponse();
     }
 
@@ -54,9 +86,14 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      *
      * @param \MyVendor\Blog\Domain\Model\Post $post
      */
-    public function showAction(\MyVendor\Blog\Domain\Model\Post $post): ResponseInterface
+    public function showAction(Post $post): ResponseInterface
     {
-        $this->view->assign('post', $post);
+        // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($comments);
+        $comments = $this->commentRepository->findApprovedByPost($post);
+        $this->view->assignMultiple([
+            'post' => $post,
+            'comments' => $comments
+        ]);
         return $this->htmlResponse();
     }
 
@@ -109,7 +146,7 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     /**
      * @param DomainObjectRepository $domainObjectRepository
      */
-    public function __construct(private readonly \MyVendor\Blog\Domain\Repository\PostRepository $postRepository)
+    public function __construct(private readonly PostRepository $postRepository, private readonly CommentRepository $commentRepository)
     {
     }
 
@@ -131,5 +168,14 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/p/friendsoftypo3/extension-builder/main/en-us/User/Index.html', '', \TYPO3\CMS\Core\Type\ContextualFeedbackSeverity::WARNING);
         $this->postRepository->add($newPost);
         return $this->redirect('list');
+    }
+
+    public function createCommentAction(Comment $comment, Post $post): ResponseInterface
+    {
+        $comment->setPost($post);
+        $comment->setIsApproved(0);
+        $this->commentRepository->add($comment);
+        // $this->addFlashMessage('Your comment has been submitted and is awaiting approval.', '', \TYPO3\CMS\Core\Type\ContextualFeedbackSeverity::INFO);
+        return $this->redirect('show', null, null, ['post' => $post]);
     }
 }

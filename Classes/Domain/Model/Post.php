@@ -19,8 +19,10 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /**
  * Post
  */
-class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Post extends AbstractEntity
 {
+    protected ObjectStorage $comments;
+    
 
     /**
      * title
@@ -51,6 +53,11 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \DateTime
      */
     protected $date = null;
+
+    public function __construct()
+    {
+        $this->comments = new ObjectStorage();
+    }
 
     /**
      * Returns the title
@@ -134,5 +141,20 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setDate(\DateTime $date)
     {
         $this->date = $date;
+    }
+
+    public function getComments(): ObjectStorage
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): void
+    {
+        $this->comments->attach($comment);
+    }
+
+    public function removeComment(Comment $comment): void
+    {
+        $this->comments->detach($comment);
     }
 }

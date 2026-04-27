@@ -1,0 +1,23 @@
+<ul class="pagination">
+    <f:if condition="{pagination.previousPageNumber}">
+        <li class="page-item">
+            <a href="#" class="page-link" data-page="{pagination.previousPageNumber}"> Prev </a>
+        </li>
+    </f:if>
+
+    <f:for each="{pagination.allPageNumbers}" as="page">
+        <li class="page-item {f:if(condition: page == paginator.currentPageNumber, then: 'active')}">
+            <a href="#" class="page-link" data-page="{page}"> {page} </a>
+        </li>
+    </f:for>
+
+    <f:if condition="{pagination.nextPageNumber}">
+        <li class="page-item">
+            <a href="#" 
+               class="page-link" 
+               data-page="{pagination.nextPageNumber}">
+                Next
+            </a>
+        </li>
+    </f:if>
+</ul>

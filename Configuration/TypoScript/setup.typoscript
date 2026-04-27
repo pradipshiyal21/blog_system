@@ -20,3 +20,39 @@ plugin.tx_blog_bloglist {
         #callDefaultActionIfActionCantBeResolved = 1
     }
 }
+
+// config {
+//   cacheHash {
+//     enforceValidation = 0
+//   }
+// }
+
+ajaxPage = PAGE
+ajaxPage {
+    typeNum = 999
+
+    config {
+        disableAllHeaderCode = 1
+        no_cache = 1
+        admPanel = 0
+        debug = 0
+    }
+
+    10 = USER
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = Blog
+        pluginName = Bloglist
+        vendorName = MyVendor
+        controller = Post
+        action = list
+        settings < plugin.tx_blog_bloglist.settings
+    }
+}
+
+// plugin.tx_blog_bloglist {
+//     settings {
+//         sortOrder = asc
+//         limit = 2
+//     }
+// }
