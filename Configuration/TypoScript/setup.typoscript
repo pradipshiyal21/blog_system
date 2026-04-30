@@ -21,12 +21,6 @@ plugin.tx_blog_bloglist {
     }
 }
 
-// config {
-//   cacheHash {
-//     enforceValidation = 0
-//   }
-// }
-
 ajaxPage = PAGE
 ajaxPage {
     typeNum = 999
@@ -50,9 +44,84 @@ ajaxPage {
     }
 }
 
-// plugin.tx_blog_bloglist {
-//     settings {
-//         sortOrder = asc
-//         limit = 2
-//     }
-// }
+# typoscript for the example purpose
+page = PAGE
+page.typeNum = 0
+
+# Example 1: Simple text output
+# This will display "Hello World"
+page.10 = TEXT
+page.10.value = Hello World!
+
+# Example 2: Another text line
+# Shows a welcome message
+page.20 = TEXT
+page.20.value = Welcome to TYPO3
+
+# Example 3: Get current page title
+# Displays title of the page from backend
+page.30 = TEXT
+page.30.data = page:title
+
+# Example 4: Static separator line
+# Just prints a line
+page.40 = TEXT
+page.40.value = ----------------------
+
+# Example 5: Display image
+# Shows image from given path
+page.50 = IMAGE
+page.50 {
+  file = fileadmin/1887.jpeg
+  file.width = 300
+}
+
+# Example 6: Styled text using HTML wrap
+# Wraps text inside <h2>
+page.60 = TEXT
+page.60 {
+  value = This is heading text
+  wrap = <h2>|</h2>
+}
+
+# Example 7: Menu (HMENU)
+# Shows list of subpages
+page.70 = HMENU
+page.70 {
+  1 = TMENU
+  1.NO = 1
+  1.NO.wrapItemAndSub = <li>|</li>
+  1.wrap = <ul>|</ul>
+}
+
+# Example 8: Current date
+# Displays today's date
+page.80 = TEXT
+page.80.value = Today is:
+page.81 = TEXT
+page.81.data = date:U
+page.81.strftime = %d-%m-%Y
+
+# Example 9: Condition (Frontend user)
+# Shows "Guest User" if not logged in
+page.90 = TEXT
+page.90 {
+  value = Guest User
+  if.isFalse.data = TSFE:fe_user|user|uid
+}
+
+# Example 10: Ending text
+# Final line on page
+page.100 = TEXT
+page.100.value = End of Page
+
+page.10.wrap = <p>|</p>
+page.20.wrap = <p>|</p>
+page.30.wrap = <p>|</p>
+page.40.wrap = <p>|</p>
+page.50.wrap = <p>|</p>
+page.60.wrap = <p>|</p>
+page.80.wrap = <p>|</p>
+page.81.wrap = <p>|</p>
+page.90.wrap = <p>|</p>
+page.100.wrap = <p>|</p>
