@@ -21,3 +21,5 @@ CREATE TABLE tx_blog_domain_model_comment (
     deleted TINYINT DEFAULT 0,
     hidden TINYINT DEFAULT 0
 );
+
+ALTER TABLE tx_blog_domain_model_post ADD slug VARCHAR(2048) NOT NULL DEFAULT '';

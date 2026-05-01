@@ -20,7 +20,7 @@ return [
         'iconfile' => 'EXT:blog/Resources/Public/Icons/tx_blog_domain_model_post.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'title, description, images, date, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
+        '1' => ['showitem' => 'title, slug, description, images, date, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -151,6 +151,20 @@ return [
             ],
             
         ],
-    
+        'slug' => [
+            'exclude' => true,
+            'label' => 'Slug',
+            'config' => [
+                'type' => 'slug',
+                'size' => 50,
+                'generatorOptions' => [
+                    'fields' => ['title'],
+                    'fieldSeparator' => '-',
+                ],
+                'fallbackCharacter' => '-',
+                'eval' => 'uniqueInSite',
+                'default' => '',
+            ],
+        ],
     ],
 ];
