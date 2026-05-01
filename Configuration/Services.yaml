@@ -6,3 +6,9 @@ services:
 
   MyVendor\Blog\:
     resource: '../Classes/*'
+
+  MyVendor\Blog\EventListener\FileRenameListener:
+    tags:
+      - name: event.listener
+        identifier: 'blog-file-rename-listener'
+        event: TYPO3\CMS\Core\Resource\Event\AfterFileRenamedEvent
