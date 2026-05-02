@@ -12,3 +12,8 @@ services:
       - name: event.listener
         identifier: 'blog-file-rename-listener'
         event: TYPO3\CMS\Core\Resource\Event\AfterFileRenamedEvent
+        
+  MyVendor\Blog\Command\BlogCleanupCommand:
+    tags:
+      - name: 'console.command'
+        command: 'blog:cleanup'
