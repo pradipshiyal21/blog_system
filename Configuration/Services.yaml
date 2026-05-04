@@ -18,4 +18,5 @@ services:
       - name: 'console.command'
         command: 'blog:cleanup'
 
-  TYPO3\CMS\Backend\Template\Components\ButtonBar:class: MyVendor\Blog\Xclass\AddDocHeaderButton
+  TYPO3\CMS\Backend\Template\Components\ButtonBar:
+    class: MyVendor\Blog\Xclass\AddDocHeaderButton
