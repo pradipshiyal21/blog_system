@@ -17,7 +17,7 @@ class AddDocHeaderButton extends ButtonBar
         
         $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
         $myButton = GeneralUtility::makeInstance(LinkButton::class)
-            ->setHref('#21')
+            ->setHref('#')
             ->setTitle('My Button')
             ->setShowLabelText(true)
             ->setIcon($iconFactory->getIcon('actions-add', Icon::SIZE_SMALL));
