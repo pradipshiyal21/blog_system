@@ -1,0 +1,14 @@
+imports:
+  - { resource: "EXT:rte_ckeditor/Configuration/RTE/Default.yaml" }
+
+editor:
+  config:
+    toolbar:
+      items:
+        - bold
+        - italic
+        - fontColor 
+    fontColor:
+      colors:
+        - { color: '#ff0000', label: 'Red' }
+        - { color: '#0000ff', label: 'Blue' }
