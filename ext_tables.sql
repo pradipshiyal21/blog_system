@@ -23,3 +23,10 @@ CREATE TABLE tx_blog_domain_model_comment (
 );
 
 ALTER TABLE tx_blog_domain_model_post ADD slug VARCHAR(2048) NOT NULL DEFAULT '';
+
+CREATE TABLE tx_news_domain_model_news (
+    feature_image int(11) unsigned NOT NULL DEFAULT '0',
+    subtitle varchar(255) DEFAULT '' NOT NULL,
+    description_news text,
+    location_simple varchar(255) DEFAULT '' NOT NULL,
+);

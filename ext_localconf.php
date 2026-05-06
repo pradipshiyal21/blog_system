@@ -16,5 +16,6 @@ defined('TYPO3') || die();
     );
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Backend\Template\Components\ButtonBar::class] = ['className' => \MyVendor\Blog\Xclass\AddDocHeaderButton::class];
     $GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets']['custom'] = 'EXT:rte_package/Configuration/RTE/Default.yaml';
+    $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['classes']['Domain/Model/News']['eventnews'] = 'blog';
 })();
 
