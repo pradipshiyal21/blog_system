@@ -21,6 +21,14 @@ plugin.tx_blog_bloglist {
     }
 }
 
+plugin.tx_news {
+  view {
+    templateRootPaths.0 = EXT:blog/Resources/Private/Extensions/News/Templates/
+    partialRootPaths.0 = EXT:blog/Resources/Private/Extensions/News/Partials/
+    layoutRootPaths.0 = EXT:blog/Resources/Private/Extensions/News/Layouts/
+  }
+}
+
 ajaxPage = PAGE
 ajaxPage {
     typeNum = 999
