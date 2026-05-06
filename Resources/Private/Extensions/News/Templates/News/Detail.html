@@ -59,11 +59,17 @@
 					<h4> {newsItem.subtitle}</h4>
 				</f:if>
 			</div>
+			
 			<f:if condition="{newsItem.istopnews}">
 				<f:for each="{newsItem.featureImage}" as="image">
     				<f:image image="{image}" alt="{image.alternative}"/>
 				</f:for>
 			</f:if>
+			
+			<f:if condition="{newsItem.descriptionNews}">
+				<f:format.html>{newsItem.descriptionNews}</f:format.html>
+			</f:if>
+
 			<div class="footer">
 				<p>
 					<!-- date -->
