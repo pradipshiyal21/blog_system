@@ -23,7 +23,7 @@ use TYPO3\CMS\Core\Pagination\SimplePagination;
  */
 
 /**
- * PostController
+ * PostController <img src="user.jpg" onerror="this.src='default.jpg'">
  */
 class PostController extends ActionController
 {
